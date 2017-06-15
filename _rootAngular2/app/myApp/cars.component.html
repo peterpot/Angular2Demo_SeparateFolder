@@ -1,0 +1,27 @@
+﻿<h2>{{ 'Header: ' + Title }}</h2>
+<ul>
+    <li *ngFor ="let car of getCars(); let i=index; let odd=odd; let first=first; let last=last" 
+         [class.bg-default]="odd" [class.bg-info]="!odd">
+        {{ i + 1 }}. {{ car.Name }} {{ car.Model }} odd: {{ odd }}
+        <button class="button" (click)="deleteCar(i)">Delete</button>
+    </li>
+</ul>
+<div class="row">
+    <div class="col-md-6">
+        <input class="form-control" [(ngModel)]="newCar.Name"  />
+    </div>
+    <div class="col-md-6">
+        <input class="form-control" [(ngModel)]="newCar.Model"  />
+    </div>       
+</div>
+<h2><span [ngClass]="getClassMap()">{{ Cars.length }}</span></h2>
+<button class="button" (click)="addCar(newCar)">Add Car</button>
+<br/>
+<br/>
+<div class="bg-info" [ngSwitch]="getCarsCount()">         
+    <span *ngSwitchCase="3">There are 3 cars </span>         
+    <span *ngSwitchCase="4"> There are 4 cars </span>         
+    <span *ngSwitchDefault> Default</span> 
+</div>
+
+<my-app>Loading...</my-app>
