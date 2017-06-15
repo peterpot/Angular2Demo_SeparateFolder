@@ -69,8 +69,21 @@ export class CarsComponent {
             " label-primary ": cars.length > 3
         };
     }
-  
-    //get Title(): string {
-    //    return "This is my first angular application";
-    //}
+
+    selectedCarName: string;
+
+    selectCar(car: Car)
+    {
+        this.selectedCarName = this.composeCarTitle(car);
+    }
+
+    getIsSelected(car: Car): boolean
+    {
+        return (this.selectedCarName == this.composeCarTitle(car));
+    }
+
+    composeCarTitle(car: Car): string
+    {
+        return car.Name + ' ' + car.Model;
+    }
 }

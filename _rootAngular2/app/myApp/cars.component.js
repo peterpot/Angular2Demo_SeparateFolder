@@ -37,8 +37,7 @@ var CarsComponent = (function () {
         }
     };
     CarsComponent.prototype.deleteCar = function (i) {
-        var del = prompt("Delete?", "Delete");
-        if (del != null)
+        if (confirm("Delete?") != null)
             this.Cars.splice(i, 1);
     };
     CarsComponent.prototype.getCars = function () {
@@ -54,6 +53,15 @@ var CarsComponent = (function () {
             " label-warning ": cars.length <= 3,
             " label-primary ": cars.length > 3
         };
+    };
+    CarsComponent.prototype.selectCar = function (car) {
+        this.selectedCarName = this.composeCarTitle(car);
+    };
+    CarsComponent.prototype.getIsSelected = function (car) {
+        return (this.selectedCarName == this.composeCarTitle(car));
+    };
+    CarsComponent.prototype.composeCarTitle = function (car) {
+        return car.Name + ' ' + car.Model;
     };
     return CarsComponent;
 }());

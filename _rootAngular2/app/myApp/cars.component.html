@@ -1,7 +1,11 @@
 ﻿<h2>{{ 'Header: ' + Title }}</h2>
+<div class="bg-info" >Selected car: <strong>{{selectedCarName || '( None)'}}</strong></div>
+<br/>
+<br/>
 <ul>
     <li *ngFor ="let car of getCars(); let i=index; let odd=odd; let first=first; let last=last" 
-         [class.bg-default]="odd" [class.bg-info]="!odd">
+         [class.bg-default]="odd" [class.bg-info]="!odd" [class.bg-danger]="getIsSelected(car)"
+        (mouseover) ="selectCar(car)">                
         {{ i + 1 }}. {{ car.Name }} {{ car.Model }} odd: {{ odd }}
         <button class="button" (click)="deleteCar(i)">Delete</button>
     </li>

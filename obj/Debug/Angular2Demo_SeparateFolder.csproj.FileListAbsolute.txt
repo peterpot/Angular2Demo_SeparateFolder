@@ -85,4 +85,3 @@ C:\VS_FromStratch\Angular2Demo_SeparateFolder\Angular2Demo_SeparateFolder\bin\Mi
 C:\VS_FromStratch\Angular2Demo_SeparateFolder\Angular2Demo_SeparateFolder\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\VS_FromStratch\Angular2Demo_SeparateFolder\Angular2Demo_SeparateFolder\obj\Debug\Angular2Demo_SeparateFolder.dll
 C:\VS_FromStratch\Angular2Demo_SeparateFolder\Angular2Demo_SeparateFolder\obj\Debug\Angular2Demo_SeparateFolder.pdb
-C:\VS_FromStratch\Angular2Demo_SeparateFolder\Angular2Demo_SeparateFolder\obj\Debug\Angular2Demo_SeparateFolder.csprojResolveAssemblyReference.cache
