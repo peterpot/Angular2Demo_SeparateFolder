@@ -1,5 +1,6 @@
 ﻿<h2>{{ 'Header: ' + Title }}</h2>
-<div class="bg-info" >Selected car: <strong>{{selectedCarName || '( None)'}}</strong></div>
+
+<div class="bg-info">Selected car: <strong>{{selectedCarName || '(None)'}}</strong></div>
 <br/>
 <br/>
 <ul>
@@ -27,5 +28,9 @@
     <span *ngSwitchCase="4"> There are 4 cars </span>         
     <span *ngSwitchDefault> Default</span> 
 </div>
-
-<my-app>Loading...</my-app>
+<br/>
+<br/>
+<div class=" form-group">
+    <label>SEARCH</label>         
+    <input class="form-control" (input)="searchCar($event.target.value)" /> 
+</div>

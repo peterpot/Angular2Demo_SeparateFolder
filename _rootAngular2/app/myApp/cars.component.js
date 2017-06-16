@@ -12,14 +12,19 @@ var core_1 = require("@angular/core");
 var car_model_1 = require("./car.model");
 var CarsComponent = (function () {
     function CarsComponent() {
+        var _this = this;
         this.Title = "This is my first angular application";
         this.Cars = [
             { Name: "Porsche", Model: "911" },
             { Name: "Audi", Model: "A5" },
             { Name: "BMW", Model: "420d" },
         ];
-        this.newCar = new car_model_1.Car;
+        this.newCar = new car_model_1.Car();
         this.resetCar();
+        this.CarsList = new Array();
+        this.Cars.forEach(function (car) {
+            _this.CarsList.push(car);
+        });
     }
     CarsComponent.prototype.resetCar = function () {
         this.newCar.Name = "";
@@ -31,23 +36,36 @@ var CarsComponent = (function () {
         Object.assign(carAdded, car);
         if (carAdded.Name != "") {
             alert(carAdded.Name);
-            this.Cars.push(carAdded);
+            this.CarsList.push(carAdded);
+            this.assignCars();
+            // Reset new car:
             car.Name = "";
             car.Model = "";
         }
     };
     CarsComponent.prototype.deleteCar = function (i) {
-        if (confirm("Delete?") != null)
-            this.Cars.splice(i, 1);
+        if (confirm("Delete?") != null) {
+            this.CarsList.splice(i, 1);
+            this.assignCars();
+        }
+    };
+    CarsComponent.prototype.assignCars = function () {
+        var _this = this;
+        this.Cars = new Array();
+        if (this.CarsList.length > 0) {
+            this.CarsList.forEach(function (car) {
+                _this.Cars.push(car);
+            });
+        }
     };
     CarsComponent.prototype.getCars = function () {
-        return this.Cars;
+        return this.CarsList;
     };
     CarsComponent.prototype.getCarsCount = function () {
-        return this.Cars.length;
+        return this.CarsList.length;
     };
     CarsComponent.prototype.getClassMap = function () {
-        var cars = this.Cars;
+        var cars = this.CarsList;
         return {
             " label ": true,
             " label-warning ": cars.length <= 3,
@@ -56,6 +74,16 @@ var CarsComponent = (function () {
     };
     CarsComponent.prototype.selectCar = function (car) {
         this.selectedCarName = this.composeCarTitle(car);
+    };
+    CarsComponent.prototype.searchCar = function (searchText) {
+        var _this = this;
+        var selectedCars = new Array();
+        this.Cars.forEach(function (car) {
+            if (_this.composeCarTitle(car).startsWith(searchText)) {
+                selectedCars.push(car);
+            }
+        });
+        this.CarsList = selectedCars;
     };
     CarsComponent.prototype.getIsSelected = function (car) {
         return (this.selectedCarName == this.composeCarTitle(car));

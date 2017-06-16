@@ -10,17 +10,23 @@ import { Car } from './car.model';
 export class CarsComponent {
     public Title: string = "This is my first angular application";
 
-    public Cars: Car[] = [
+    public Cars: Array<Car> = [
         { Name: "Porsche", Model: "911" },
         { Name: "Audi", Model: "A5" },
         { Name: "BMW", Model: "420d" },
     ]
 
-    public newCar: Car = new Car;
+    CarsList: Array<Car>;
+    newCar: Car = new Car();
+
 
     constructor()
     {
         this.resetCar();
+        this.CarsList = new Array<Car>();
+        this.Cars.forEach((car) => { // foreach statement  
+            this.CarsList.push(car);
+        }) 
     }
 
     resetCar()
@@ -37,8 +43,10 @@ export class CarsComponent {
         if (carAdded.Name != "")
         {
             alert(carAdded.Name);
-            this.Cars.push(carAdded);
+            this.CarsList.push(carAdded);
+            this.assignCars();
 
+            // Reset new car:
             car.Name = "";
             car.Model = "";
         }
@@ -47,22 +55,37 @@ export class CarsComponent {
     deleteCar(i: number)
     {
         if (confirm("Delete?") != null)
-            this.Cars.splice(i, 1);
+        {
+            this.CarsList.splice(i, 1);
+            this.assignCars();
+        }            
     }
 
-    getCars(): Car[]
+
+    assignCars()
     {
-        return this.Cars;
+        this.Cars = new Array<Car>();
+        if (this.CarsList.length > 0)
+        {            
+            this.CarsList.forEach((car) => { // foreach statement  
+                this.Cars.push(car);
+            }) 
+        }
+    }
+
+    getCars(): Array<Car>
+    {
+        return this.CarsList;
     }
 
     getCarsCount(): number
     {
-        return this.Cars.length;
+        return this.CarsList.length;
     }
 
     getClassMap(): Object
     {
-        let cars = this.Cars
+        let cars = this.CarsList
         return {
             " label ": true,
             " label-warning ": cars.length <= 3,
@@ -75,6 +98,20 @@ export class CarsComponent {
     selectCar(car: Car)
     {
         this.selectedCarName = this.composeCarTitle(car);
+    }
+
+    searchCar(searchText: string)
+    {
+        var selectedCars: Array<Car> = new Array<Car>();
+
+        this.Cars.forEach((car) => { // foreach statement  
+            if (this.composeCarTitle(car).startsWith(searchText))
+            {
+                selectedCars.push(car);
+            }
+        }) 
+
+        this.CarsList = selectedCars;      
     }
 
     getIsSelected(car: Car): boolean
